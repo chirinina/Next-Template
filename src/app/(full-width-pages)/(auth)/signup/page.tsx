@@ -2,8 +2,8 @@ import SignUpForm from "@/components/auth/SignUpForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next.js SignUp Page | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js SignUp Page TailAdmin Dashboard Template",
+  title: "Diolay  SignUp Page | Diolay  ",
+  description: "This is Diolay  SignUp Page ",
   // other metadata
 };
 

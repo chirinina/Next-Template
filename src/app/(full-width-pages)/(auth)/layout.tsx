@@ -30,7 +30,7 @@ export default function AuthLayout({
                   />
                 </Link>
                 <p className="text-center text-gray-400 dark:text-white/60">
-                  Free and Open-Source Tailwind CSS Admin Dashboard Template
+                  Bienvenido a Diolay, Inicia sesión para continuar con tu dashboard
                 </p>
               </div>
             </div>

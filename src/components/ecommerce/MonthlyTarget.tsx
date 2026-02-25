@@ -78,10 +78,10 @@ export default function MonthlyTarget() {
         <div className="flex justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-              Monthly Target
+              Objetivo mensual
             </h3>
             <p className="mt-1 font-normal text-gray-500 text-theme-sm dark:text-gray-400">
-              Target you’ve set for each month
+              Objetivo que has establecido para cada mes
             </p>
           </div>
           <div className="relative inline-block">
@@ -125,8 +125,7 @@ export default function MonthlyTarget() {
           </span>
         </div>
         <p className="mx-auto mt-10 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
-          You earn $3287 today, it&apos;s higher than last month. Keep up your
-          good work!
+          Ganas $3287 hoy, es más que el mes pasado. ¡Sigue con tu buen trabajo!
         </p>
       </div>
 

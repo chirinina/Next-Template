@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useSidebar } from "../context/SidebarContext";
 import {
   BoxCubeIcon,
+  BoltIcon,
   CalenderIcon,
   ChevronDownIcon,
   GridIcon,
@@ -29,32 +30,42 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
-    name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    name: "Escritorio",
+    subItems: [{ name: "Comercio", path: "/", pro: false }],
+  },
+    {
+    icon: <BoltIcon />,
+    name: "Asistente IA",
+    subItems: [
+      { name: "Generdor de Texto", path: "/text", pro: false },
+      { name: "Generador de Imagenes", path: "/image", pro: false },
+      { name: "Generador de Código", path: "/code", pro: false },
+      { name: "Generador de Videos", path: "/video", pro: false },
+    ],
   },
   {
     icon: <CalenderIcon />,
-    name: "Calendar",
+    name: "Calendario",
     path: "/calendar",
   },
   {
     icon: <UserCircleIcon />,
-    name: "User Profile",
+    name: "Usuarios Perfil",
     path: "/profile",
   },
 
   {
-    name: "Forms",
+    name: "Formularios",
     icon: <ListIcon />,
     subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
-    name: "Tables",
+    name: "Tablas",
     icon: <TableIcon />,
     subItems: [{ name: "Basic Tables", path: "/basic-tables", pro: false }],
   },
   {
-    name: "Pages",
+    name: "Paginas",
     icon: <PageIcon />,
     subItems: [
       { name: "Blank Page", path: "/blank", pro: false },
@@ -66,7 +77,7 @@ const navItems: NavItem[] = [
 const othersItems: NavItem[] = [
   {
     icon: <PieChartIcon />,
-    name: "Charts",
+    name: "Graficos",
     subItems: [
       { name: "Line Chart", path: "/line-chart", pro: false },
       { name: "Bar Chart", path: "/bar-chart", pro: false },
@@ -74,7 +85,7 @@ const othersItems: NavItem[] = [
   },
   {
     icon: <BoxCubeIcon />,
-    name: "UI Elements",
+    name: "UI Elementos",
     subItems: [
       { name: "Alerts", path: "/alerts", pro: false },
       { name: "Avatar", path: "/avatars", pro: false },
@@ -86,7 +97,7 @@ const othersItems: NavItem[] = [
   },
   {
     icon: <PlugInIcon />,
-    name: "Authentication",
+    name: "Login & Registro",
     subItems: [
       { name: "Sign In", path: "/signin", pro: false },
       { name: "Sign Up", path: "/signup", pro: false },
