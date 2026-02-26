@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, User } from "lucide-react";
+import { Send, User, ArrowLeft } from "lucide-react";
 
 interface Message {
   id: number;
@@ -20,6 +20,7 @@ interface Conversation {
 
 export default function SupportChatPage() {
   const [showProfile, setShowProfile] = useState(false);
+  const [showMobileChat, setShowMobileChat] = useState(false);
 
   const [conversations, setConversations] = useState<Conversation[]>(
     Array.from({ length: 10 }).map((_, i) => ({
@@ -108,11 +109,14 @@ export default function SupportChatPage() {
   }, [conversations]);
 
   return (
-    <div className="h-[calc(80vh-110px)] w-full flex rounded-xl bg-white dark:bg-gray-900 shadow-sm border border-gray-200 dark:border-gray-800">
+    <div className="h-[calc(100vh-80px)] w-full flex rounded-xl bg-white dark:bg-gray-900 shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
 
       {/* SIDEBAR */}
-      <div className="w-full md:w-[360px] border-r border-gray-200 dark:border-gray-800 flex flex-col bg-white dark:bg-gray-900">
-
+      <div
+        className={`${
+          showMobileChat ? "hidden" : "flex"
+        } md:flex w-full md:w-[360px] border-r border-gray-200 dark:border-gray-800 flex-col bg-white dark:bg-gray-900`}
+      >
         <div className="px-6 py-5 border-b border-gray-200 dark:border-gray-800">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
             Bandeja de Entrada
@@ -129,7 +133,10 @@ export default function SupportChatPage() {
             return (
               <div
                 key={conv.id}
-                onClick={() => setActiveConversationId(conv.id)}
+                onClick={() => {
+                  setActiveConversationId(conv.id);
+                  setShowMobileChat(true);
+                }}
                 className={`flex gap-4 px-6 py-4 cursor-pointer transition-all border-l-4 ${
                   activeConversationId === conv.id
                     ? "bg-gray-50 dark:bg-gray-800 border-primary"
@@ -167,17 +174,28 @@ export default function SupportChatPage() {
       </div>
 
       {/* CHAT AREA */}
-      <div className="hidden md:flex flex-1 flex-col bg-gray-50 dark:bg-gray-950">
-
+      <div
+        className={`${
+          showMobileChat ? "flex" : "hidden"
+        } md:flex flex-1 flex-col bg-gray-50 dark:bg-gray-950`}
+      >
         {activeConversation && (
           <>
             {/* HEADER */}
-            <div className="px-6 py-4 flex items-center justify-between bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-              <div className="flex items-center gap-4">
+            <div className="px-4 md:px-6 py-4 flex items-center justify-between bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setShowMobileChat(false)}
+                  className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  <ArrowLeft size={18} />
+                </button>
+
                 <img
                   src={activeConversation.userAvatar}
-                  className="w-10 h-10 rounded-full"
+                  className="w-9 h-9 md:w-10 md:h-10 rounded-full"
                 />
+
                 <div>
                   <p className="text-sm font-semibold text-gray-800 dark:text-white">
                     {activeConversation.userName}
@@ -199,7 +217,7 @@ export default function SupportChatPage() {
             </div>
 
             {/* MENSAJES */}
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5 chat-scroll">
+            <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6 space-y-5 chat-scroll">
               {activeConversation.messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -210,9 +228,9 @@ export default function SupportChatPage() {
                   }`}
                 >
                   <div
-                    className={`max-w-md px-5 py-3 rounded-xl text-sm shadow-sm ${
+                    className={`max-w-[85%] md:max-w-md px-4 md:px-5 py-3 rounded-xl text-sm shadow-sm ${
                       msg.sender === "support"
-                        ? "bg-blue-500 text-white"
+                        ? "bg-blue-600 text-white"
                         : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700"
                     }`}
                   >
@@ -227,7 +245,7 @@ export default function SupportChatPage() {
             </div>
 
             {/* INPUT */}
-            <div className="px-6 py-4 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+            <div className="px-4 md:px-6 py-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
               <div className="flex items-center gap-3">
                 <input
                   type="text"
@@ -240,9 +258,10 @@ export default function SupportChatPage() {
 
                 <button
                   onClick={handleSend}
-className="px-5 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700 transition shadow-sm"                >
+                  className="px-4 md:px-5 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 hover:bg-blue-700 transition shadow-sm"
+                >
                   <Send size={16} />
-                  Enviar
+                  <span className="hidden sm:inline">Enviar</span>
                 </button>
               </div>
             </div>
@@ -250,51 +269,32 @@ className="px-5 py-2 bg-blue-600 text-white rounded-lg flex items-center gap-2 h
         )}
       </div>
 
-      {/* PROFILE MODAL */}
-      {/* PROFILE PANEL */}
-{showProfile && activeConversation && (
-  <div className="hidden lg:flex w-[300px] border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 flex-col p-6">
-    <div className="text-center">
-      <img
-        src={activeConversation.userAvatar}
-        className="w-24 h-24 rounded-full mx-auto mb-4"
-      />
+      {/* PROFILE PANEL DESKTOP */}
+      {showProfile && activeConversation && (
+        <div className="hidden lg:flex w-[300px] border-l border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 flex-col p-6">
+          <div className="text-center">
+            <img
+              src={activeConversation.userAvatar}
+              className="w-24 h-24 rounded-full mx-auto mb-4"
+            />
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              {activeConversation.userName}
+            </h3>
+            <p className="text-sm text-gray-500 mt-1">
+              {activeConversation.online
+                ? "Usuario en línea"
+                : "Usuario desconectado"}
+            </p>
+          </div>
 
-      <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-        {activeConversation.userName}
-      </h3>
-
-      <p className="text-sm text-gray-500 mt-1">
-        {activeConversation.online
-          ? "Usuario en línea"
-          : "Usuario desconectado"}
-      </p>
-    </div>
-
-    <div className="mt-8 space-y-4 text-sm text-gray-600 dark:text-gray-300">
-      <div>
-        <p className="font-medium text-gray-800 dark:text-white">
-          Estado
-        </p>
-        <p>{activeConversation.online ? "Activo" : "Inactivo"}</p>
-      </div>
-
-      <div>
-        <p className="font-medium text-gray-800 dark:text-white">
-          Conversación ID
-        </p>
-        <p>#{activeConversation.id}</p>
-      </div>
-    </div>
-
-    <button
-      onClick={() => setShowProfile(false)}
-      className="mt-auto w-full py-2 bg-primary text-white rounded-lg hover:opacity-90 transition"
-    >
-      Cerrar perfil
-    </button>
-  </div>
-)}
+          <button
+            onClick={() => setShowProfile(false)}
+            className="mt-auto w-full py-2 bg-primary text-white rounded-lg hover:opacity-90 transition"
+          >
+            Cerrar perfil
+          </button>
+        </div>
+      )}
     </div>
   );
 }
