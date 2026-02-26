@@ -7,7 +7,7 @@ import React from "react";
 export const metadata: Metadata = {
   title: "Diolay  Basic Table | Diolay  ",
   description:
-    "This is Diolay  Basic Table  page for TailAdmin  Tailwind CSS Admin ",
+    "This is Diolay  Basic Table  page for Diolay  Tailwind CSS Admin ",
   // other metadata
 };
 

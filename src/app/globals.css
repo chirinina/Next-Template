@@ -750,3 +750,36 @@ span.flatpickr-weekday,
   opacity: 0.8;
   cursor: grabbing; /* Changes the cursor to indicate dragging */
 }
+/* =================================================
+   GLOBAL SAFE SCROLL — Compatible y sin romper UI
+================================================= */
+
+/* Suaviza el desplazamiento */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #22c55e; /* Primary TailAdmin */
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2f3fd3;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #22c55e transparent;
+}

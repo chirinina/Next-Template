@@ -47,6 +47,16 @@ const navItems: NavItem[] = [
     icon: <CalenderIcon />,
     name: "Calendario",
     path: "/calendar",
+},
+ 
+  {
+    icon: <UserCircleIcon />,
+    name: "Soporte",
+    subItems: [
+      { name: "Chat de Soporte", path: "/chat", new: true },
+      { name: "Configuración de Soporte", path: "/supportsettings", new: true },
+      { name: "Lista Negra", path: "/blacklist", new: true },
+    ],
   },
   {
     icon: <UserCircleIcon />,
